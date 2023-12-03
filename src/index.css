@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.bodyy{
+  height: 100vh;
+  width: fit-content;
+  background: rgb(6, 125, 204)000;
+}
+
+.accountcard{
+  margin: 50px;
+  padding: 50px;
+  background-color: aliceblue;
+}
+
+.schooltable{
+  width: 100vh
+}
+
+.marginforsearch{
+  margin: 20px;
+}
