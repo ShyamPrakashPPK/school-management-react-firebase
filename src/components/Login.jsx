@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography, Card, CardContent, Container } from "@mui/material";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
 
@@ -33,10 +33,20 @@ const Login = () => {
     };
 
     return (
-        <div className="body">
-            <section className="loginsection">
-                <div className="logincard">
-                    <Typography variant="h6" className="firebaseauthtext">
+        <Container
+            component="main"
+            maxWidth="xs"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100vh',
+            }}
+        >
+            <Card sx={{ borderRadius: 2 }}>
+                <CardContent>
+                    <Typography variant="h6" align="center" sx={{ mb: 3 }}>
                         Firebase Auth Login
                     </Typography>
                     {error && <Typography variant="body2" color="error">{error}</Typography>}
@@ -63,19 +73,20 @@ const Login = () => {
                             </Button>
                         </div>
                     </form>
-                    <div style={{ marginTop: '16px' }}>
+                    <div className="p-4 box mt-4 text-center">
+                        Don't have an account? <Link to="/signup">Sign up</Link>
+                    </div>
+                    <div  style={{ marginTop: '16px', width: '100%' }}>
                         <GoogleButton
                             className="g-btn"
                             type="dark"
                             onClick={handleGoogleSignIn}
                         />
                     </div>
-                    <div className="p-4 box mt-3 text-center">
-                        Don't have an account? <Link to="/signup">Sign up</Link>
-                    </div>
-                </div>
-            </section>
-        </div>
+                    
+                </CardContent>
+            </Card>
+        </Container>
     );
 };
 
