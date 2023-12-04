@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { TextField, Button, Typography } from "@mui/material";
+import Alert from '@mui/material/Alert';
 import { useUserAuth } from "../context/UserAuthContext";
 
 const Signup = () => {
@@ -9,7 +9,7 @@ const Signup = () => {
     const [error, setError] = useState("");
     const [password, setPassword] = useState("");
     const { signUp } = useUserAuth();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,31 +25,33 @@ const Signup = () => {
     return (
         <>
             <div className="p-4 loginBody boxx">
-                <h2 className="mb-3">Firebase Auth Signup</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
-                            type="email"
-                            placeholder="Email address"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
-
-                    <div className="d-grid gap-2">
-                        <Button variant="primary" type="Submit">
+                <Typography variant="h6" className="mb-3">
+                    Firebase Auth Signup
+                </Typography>
+                {error && <Alert variant="filled" severity="error">{error}</Alert>}
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        fullWidth
+                        type="email"
+                        label="Email address"
+                        variant="outlined"
+                        margin="normal"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <TextField
+                        fullWidth
+                        type="password"
+                        label="Password"
+                        variant="outlined"
+                        margin="normal"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div style={{ marginTop: '16px' }}>
+                        <Button variant="contained" color="primary" type="submit" fullWidth>
                             Sign up
                         </Button>
                     </div>
-                </Form>
+                </form>
             </div>
             <div className="p-4 box mt-3 text-center">
                 Already have an account? <Link to="/">Log In</Link>
