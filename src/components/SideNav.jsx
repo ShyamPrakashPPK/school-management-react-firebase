@@ -13,14 +13,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
-import { Person } from '@mui/icons-material';
-
-import { Dashboard } from '@mui/icons-material';
-
-import { Book } from '@mui/icons-material';
-
+import { Logout, Person, Dashboard, Book } from '@mui/icons-material';
+import { Avatar, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useUserAuth } from '../context/UserAuthContext';
 
 const drawerWidth = 240;
 
@@ -47,14 +43,16 @@ const closedMixin = (theme) => ({
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
 
-
+const AvatarContainer = styled('div')({
+    marginBottom: '8px',
+});
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -76,7 +74,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function SideNav() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
-const navigate=useNavigate()
+    const navigate = useNavigate();
+    const { user, logOut } = useUserAuth();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -86,20 +85,39 @@ const navigate=useNavigate()
         setOpen(false);
     };
 
+    const handlelogout = async (e) => {
+        e.preventDefault();
+        try {
+            await logOut();
+            navigate('/');
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-        
+
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
+                    <AvatarContainer>
+                        <Avatar
+                            alt={user.displayName || 'User'}
+                            src={user.photoURL || 'dummy-profile-picture.jpg'}
+                            sx={{ width: '80px', height: '80px' }}
+                        />
+                    </AvatarContainer>
+                    <Typography variant="h6" sx={{ marginTop: '8px', display: open ? 'block' : 'none' }}>
+                        {user.displayName || 'User'}
+                    </Typography>
                     <IconButton onClick={() => setOpen(!open)}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
                 <List>
-
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>{navigate('/dashboard')}}>
+                    <ListItem disablePadding onClick={() => navigate('/dashboard')}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -107,20 +125,14 @@ const navigate=useNavigate()
                                 px: 2.5,
                             }}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
+                            <ListItemIcon>
                                 <Dashboard />
                             </ListItemIcon>
                             <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
 
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate('/syllabus') }}>
+                    <ListItem disablePadding onClick={() => navigate('/syllabus')}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -128,20 +140,14 @@ const navigate=useNavigate()
                                 px: 2.5,
                             }}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
+                            <ListItemIcon>
                                 <Book />
                             </ListItemIcon>
                             <ListItemText primary="Syllabus" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
 
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate('/account') }}>
+                    <ListItem disablePadding onClick={() => navigate('/account')}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -149,24 +155,31 @@ const navigate=useNavigate()
                                 px: 2.5,
                             }}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                < Person />
+                            <ListItemIcon>
+                                <Person />
                             </ListItemIcon>
                             <ListItemText primary="Account" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
+                    <Divider />
+                    <ListItem disablePadding onClick={handlelogout}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon>
+                                <Logout />
+                            </ListItemIcon>
+                            <ListItemText primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
-
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <DrawerHeader />
-
+                {/* Your main content here */}
             </Box>
         </Box>
     );

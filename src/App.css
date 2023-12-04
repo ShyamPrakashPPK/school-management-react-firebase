@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -38,20 +42,9 @@
 }
 
 
-.loginBody {
-  background-color: #fafafa;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 100%;
-  align-items: center;
-  height: 100vh;
-}
 
-.boxx {
-  border: 1px solid #dfdfdf;
-  background-color: #fff;
-}
+
+
 
 .g-btn {
   width: 100% !important;

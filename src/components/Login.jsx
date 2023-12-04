@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Button } from "@mui/material";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
 
@@ -34,46 +34,50 @@ const Login = () => {
     };
 
     return (
-        <>
-            <div className="p-4 loginBody boxx">
-                <h2 className="mb-3">Firebase Auth Login</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
-                            type="email"
-                            placeholder="Email address"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
+        <div className="body">
+            <section className="loginsection">
+                <div className="logincard">
+                    <h2 className="firebaseauthtext">Firebase Auth Login</h2>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Control
+                                type="email"
+                                placeholder="Email address"
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control
+                                type="password"
+                                placeholder="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <div className="d-grid gap-2">
-                        <Button variant="primary" type="Submit">
-                            Log In
-                        </Button>
+                        <div className="d-grid gap-2">
+                            <Button variant="primary" type="Submit">
+                                Log In
+                            </Button>
+                        </div>
+                    </Form>
+                    <div>
+                        <GoogleButton
+                            className="g-btn"
+                            type="dark"
+                            onClick={handleGoogleSignIn}
+                        />
                     </div>
-                </Form>
-                <hr />
-                <div>
-                    <GoogleButton
-                        className="g-btn"
-                        type="dark"
-                        onClick={handleGoogleSignIn}
-                    />
+                    <div className="p-4 box mt-3 text-center">
+                        Don't have an account? <Link to="/signup">Sign up</Link>
+                    </div>
                 </div>
-            </div>
-            <div className="p-4 box mt-3 text-center">
-                Don't have an account? <Link to="/signup">Sign up</Link>
-            </div>
-        </>
+              
+            </section>
+
+        </div>
+        
     );
 };
 

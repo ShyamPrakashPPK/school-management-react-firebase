@@ -1,4 +1,6 @@
+
 body {
+  background-color: rgb(44, 121, 173);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,28 +9,51 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Set the background to cover the entire screen */
+html,
+#root {
+  height: 100%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 
-.bodyy{
-  height: 100vh;
-  width: fit-content;
-  background: rgb(6, 125, 204)000;
-}
-
-.accountcard{
+.accountcard {
   margin: 50px;
   padding: 50px;
   background-color: aliceblue;
 }
 
-.schooltable{
+.schooltable {
   width: 100vh
 }
 
-.marginforsearch{
+.marginforsearch {
   margin: 20px;
+}
+
+
+
+
+.logincard {
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 500px;
+  height: 300px;
+  background-color: rgb(206, 206, 206);
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  margin: -25px 0 0 -25px;
+}
+
+.firebaseauthtext{
+  font-size: large;
+  padding: 2px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }

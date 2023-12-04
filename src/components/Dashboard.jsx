@@ -4,25 +4,21 @@ import { Box } from '@mui/material'
 
 import SchoolTable from './pages/school/SchoolTable';
 
-
 export default function Dashboard() {
     return (
         <>
-            <main className='bodyy'>
+            <div className='body' style={{ backgroundColor: 'rgb(44, 121, 173)', height: '100vh' }}>
                 <Box sx={{ display: 'flex' }}>
-
-                    <Box height={70}>
+                    <Box>
                         <Box sx={{ display: "flex" }}>
                             <SideNav />
-
                             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-
                                 <SchoolTable />
                             </Box>
                         </Box>
                     </Box>
                 </Box>
-            </main>
+            </div>
         </>
     )
 }
